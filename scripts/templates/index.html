@@ -62,9 +62,9 @@
 
         function getUpdate() {
             $.get('/update', function (data) {
+                //TODO add non-json string detection
                 connection_failn = 0;
                 var speed = jQuery.parseJSON(data).speed;
-                console.log(speed)
                 $('#current_speed').text(speed);
             });
 

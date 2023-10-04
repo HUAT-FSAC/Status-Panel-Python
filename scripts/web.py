@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+import threading
+import main
 from flask import Flask, render_template
-from flask_socketio import SocketIO, send, emit
+# from flask_socketio import SocketIO, send, emit
 
 # global
 app = Flask(__name__)
@@ -15,7 +17,12 @@ def index():
 
 @app.route('/update')
 def update():
-    return '{"speed": 100}';
+    return main.VehicleData.json_data
+
+def run():
+    t = threading.Thread(target=app.run(host="0.0.0.0"))
+    t.daemon = True
+    t.start()
 
 if __name__ == "__main__":
-    app.run()
+    print("what?")
