@@ -29,7 +29,7 @@
     <div class="container mdui-container">
         <h1>IMU Report:</h1>
         <div class="mdui-row">
-            <div class="mdui-col-xs-3">
+            <div class="mdui-col-xs-4">
                 <div class="mdui-card">
                     <div class="mdui-card-primary">
                         <div class="mdui-card-primary-title">Current Speed:</div>
@@ -41,19 +41,46 @@
                     </div>
                 </div>
             </div>
-            <div class="mdui-col-xs-9">
+            <div class="mdui-col-xs-8">
                 <div class="mdui-card">
                     <div class="mdui-card-primary">
                         <div class="mdui-card-primary-title">Current Location:</div>
                         <div class="mdui-card-primary-subtitle">Measured from IMU</div>
                     </div>
                     <!-- TODO: add map media -->
-                    <div class="mdui-card-content">{{current_lat}}°, {{current_lon}}°</div>
+                    <div class="mdui-card-content">
+                        <span id="lat" />{{lat}}
+                        <span>°N, </span>
+                        <span id="lon" />{{lon}}
+                        <span> °E</span>
+                        with a altitute of
+                        <span id="alt" />{{alt}}
+                    </div>
                 </div>
             </div>
         </div>
 
         <h1>VCU Report:</h1>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-12">
+                <div class="mdui-card">
+                    <div class="mdui-card-primary">
+                        <div class="mdui-card-primary-subtitle">
+                            Turning Angle:
+                            <span id="steering">0</span>deg
+                        </div>
+                        <div class="mdui-card-primary-subtitle">
+                            Throttle:
+                            <span id="pedal_ratio">0</span>%
+                        </div>
+                        <div class="mdui-card-primary-subtitle">
+                            Wheel Speed:
+                            <span id="speed_left_front">0</span> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
