@@ -1,0 +1,3 @@
+<launch>
+    <node name="status_panel" pkg="status-panel" output="screen" type="main.py" />
+</launch>
