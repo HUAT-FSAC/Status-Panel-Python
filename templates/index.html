@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Status Panel</title>
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+
+</head>
+
+<body
+    class="mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink mdui-theme-layout-auto mdui-loaded"
+    style="background: #232323;">
+
+    <header class="appbar mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar mdui-color-theme">
+            <a href="javascript:;" class="mdui-typo-title">HUAT-FSAC Status Panel</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <a href="javascript:;" class="mdui-btn mdui-btn-icon">
+                <i class="mdui-icon material-icons">refresh</i>
+            </a>
+            <a href="javascript:;" class="mdui-btn mdui-btn-icon">
+                <i class="mdui-icon material-icons">more_vert</i>
+            </a>
+        </div>
+    </header>
+
+    <div class="container mdui-container">
+        <h1>IMU Report:</h1>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-3">
+                <div class="mdui-card">
+                    <div class="mdui-card-primary">
+                        <div class="mdui-card-primary-title">Current Speed:</div>
+                        <div class="mdui-card-primary-subtitle">Measured from IMU</div>
+                    </div>
+        
+                    <div class="mdui-card-content">{{current_speed}} km/h</div>
+                </div>
+            </div>
+            <div class="mdui-col-xs-9">
+                <div class="mdui-card">
+                    <div class="mdui-card-primary">
+                        <div class="mdui-card-primary-title">Current Location:</div>
+                        <div class="mdui-card-primary-subtitle">Measured from IMU</div>
+                    </div>
+                    <!-- TODO: add map media -->
+                    <div class="mdui-card-content">{{current_lat}}°, {{current_lon}}°</div>
+                </div>
+            </div>
+        </div>
+
+        <h1>VCU Report:</h1>
+    </div>
+</body>
+</html>
