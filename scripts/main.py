@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
-import rospy, web, math, json, time, pprint
+import rospy, web, math, json, pprint
 from common_msgs.msg import HUAT_ASENSING, vehicle_status
 
 class VehicleData():
