@@ -14,22 +14,24 @@
 </head>
 
 <body
-    class="mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink mdui-theme-layout-auto mdui-loaded">
+    class="mdui-loaded mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink mdui-theme-layout-auto">
 
     <header class="appbar mdui-appbar mdui-appbar-fixed">
         <div class="mdui-toolbar mdui-color-theme">
-            <a href="javascript:;" class="mdui-typo-title">HUAT-FSAC Status Panel</a>
-            <div class="mdui-toolbar-spacer"></div>
-            <a href="/" class="mdui-btn mdui-btn-icon">
-                <!-- TODO better refresh -->
-                <i class="mdui-icon material-icons">refresh</i>
-            </a>
             <a href="javascript:;" class="mdui-btn mdui-btn-icon">
-                <!-- TODO change to nav items -->
-                <i class="mdui-icon material-icons">more_vert</i>
+              <i class="mdui-icon material-icons" mdui-drawer="{target: '#drawer', swipe: true, overlay: true}">menu</i>
             </a>
-        </div>
+            <span class="mdui-typo-title">FSAC 车辆状态监测</span>
+            <div class="mdui-toolbar-spacer"></div>
+            <a href="javascript:;" class="mdui-btn mdui-btn-icon">
+              <i class="mdui-icon material-icons">refresh</i>
+            </a>
+          </div>
     </header>
+
+    <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height" id="drawer">
+        ... drawer content ...
+    </div>
 
     <div class="container mdui-container">
         <h1>IMU Report:</h1>

@@ -22,13 +22,15 @@ def index():
 
 @socketio.on('connect')
 def handle_connection():
-    print('frontend has connected')
-    socketio.emit("connection", "backend connected")
+    # print('frontend has connected')
+    # socketio.emit("connection", "backend connected")
+    pass
 
 @socketio.on('disconnect')
 def handle_disconnect():
-    print('frontend disconnected')
-    socketio.emit("connection", "backend disconnected")
+    # print('frontend disconnected')
+    # socketio.emit("connection", "backend disconnected")
+    pass
 
 @socketio.on('msg')
 def msg(data):
