@@ -1,3 +1,4 @@
 <launch>
-    <node name="status_panel" pkg="status-panel" output="screen" type="main.py" />
+    <node name="status_panel_main" pkg="status-panel" output="screen" type="main.py" ns="sp" />
+    <node name="status_panel_web_interface" pkg="status-panel" output="screen" type="web.py" ns="sp" />
 </launch>
