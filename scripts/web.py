@@ -12,7 +12,13 @@ socketio = SocketIO(app)
 # web route
 @app.route('/')
 def index():
-    return render_template("index.html", current_speed=0.0, current_lat=0.0, current_lon=0.0)
+    return render_template(
+        "index.html", 
+        current_speed=0.0, 
+        lat=0.0, 
+        lon=0.0,
+        alt=0.0
+    )
 
 @socketio.on('connect')
 def handle_connection():

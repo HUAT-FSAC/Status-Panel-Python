@@ -25,7 +25,7 @@
                 <i class="mdui-icon material-icons">refresh</i>
             </a>
             <a href="javascript:;" class="mdui-btn mdui-btn-icon">
-                <!-- TODO -->
+                <!-- TODO change to nav items -->
                 <i class="mdui-icon material-icons">more_vert</i>
             </a>
         </div>
@@ -97,13 +97,29 @@
             console.log(socket);
 
             socket.on('connect', function () {
-                console.log("connected");
-                alert("connect");
-                //TODO mudi snackbar
+                console.log("connected")
+                mdui.snackbar({
+                    message: '已连接到后端',
+                    buttonText: '知道了',
+                    position: 'right-bottom',
+                    // onClick: function () {
+                    //     mdui.alert('点击了 Sanckbar');
+                    // },
+                    // onButtonClick: function () {
+                    //     mdui.alert('点击了按钮');
+                    // },
+                    // onClose: function () {
+                    //     mdui.alert('关闭了');
+                    // }
+                });
             });
 
             socket.on('disconnect', function () {
-                //TODO mudi snackbar
+                mdui.snackbar({
+                    message: '与后端的连接已断开',
+                    buttonText: '知道了',
+                    position: 'right-bottom',
+                });
             })
 
             socket.on('server_response', function (rep) {
