@@ -4,10 +4,13 @@
 <head>
     <meta charset="utf-8">
     <title>Status Panel</title>
-    <link rel="stylesheet" href="../static/css/mdui.min.css" />
-    <script src="../static/js/mdui.min.js"></script>
-    <script src="../static/js/socket.io.js"></script>
-    <script src="../static/js/jquery.js"></script>
+    <!-- <link rel="stylesheet" href="../static/css/mdui.min.css" /> -->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <!-- <script src="../static/js/mdui.min.js"></script> -->
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <!-- <script src=" ../static/js/jquery.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
 
 <body
@@ -18,9 +21,11 @@
             <a href="javascript:;" class="mdui-typo-title">HUAT-FSAC Status Panel</a>
             <div class="mdui-toolbar-spacer"></div>
             <a href="/" class="mdui-btn mdui-btn-icon">
+                <!-- TODO better refresh -->
                 <i class="mdui-icon material-icons">refresh</i>
             </a>
             <a href="javascript:;" class="mdui-btn mdui-btn-icon">
+                <!-- TODO -->
                 <i class="mdui-icon material-icons">more_vert</i>
             </a>
         </div>
@@ -75,7 +80,7 @@
                         </div>
                         <div class="mdui-card-primary-subtitle">
                             Wheel Speed:
-                            <span id="speed_left_front">0</span> 
+                            <span id="speed_left_front">0</span>
                         </div>
                     </div>
                 </div>
@@ -84,36 +89,29 @@
     </div>
 
     <script>
-        var connection_failn = 0;
-        //TODO rewrite using $.ajax
+        $(document).ready(function () {
+            // var addr = "http://" + document.domain + ':' + location.port + "/update";
+            var addr = document.domain + ':' + location.port
+            console.log(addr);
+            var socket = io.connect(addr);
+            console.log(socket);
 
-        function getUpdate() {
-            $.get('/update', function (data) {
-                //TODO add non-json string detection
-                connection_failn = 0;
-                var speed = jQuery.parseJSON(data).speed;
-                $('#current_speed').text(speed);
+            socket.on('connect', function () {
+                console.log("connected")
+                //TODO mudi snackbar
             });
 
-            if (connection_failn > 5) {
-                mdui.$.snackbar({
-                    message: 'Archived',
-                    buttonText: 'undo',
-                    onClick: function () {
-                        mdui.alert('点击了 Sanckbar');
-                    },
-                    onButtonClick: function () {
-                        mdui.alert('点击了按钮');
-                    },
-                    onClose: function () {
-                        mdui.alert('关闭了');
-                    }
-                });
-            }
-        }
+            socket.on('disconnect', function () {
+                //TODO mudi snackbar
+            })
 
-        setInterval(getUpdate, 1000);
+            socket.on('server_response', function (rep) {
+                //TODO: update ui elements
+                console.log(rep)
+            });
+        });
     </script>
+
 </body>
 
 </html>
