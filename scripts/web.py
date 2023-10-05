@@ -6,7 +6,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 
 # global
-app = Flask(__name__, template_folder='./template')
+app = Flask(__name__)
 socketio = SocketIO(app)
 
 # web route
@@ -36,6 +36,7 @@ def control(cmd):
     pass
 
 def update(data):
+    # only json accepted
     socketio.emit("server_response", data)
 
 if __name__ == "__main__":

@@ -97,7 +97,8 @@
             console.log(socket);
 
             socket.on('connect', function () {
-                console.log("connected")
+                console.log("connected");
+                alert("connect");
                 //TODO mudi snackbar
             });
 
@@ -108,6 +109,14 @@
             socket.on('server_response', function (rep) {
                 //TODO: update ui elements
                 console.log(rep)
+                var json_obj = JSON.parse(rep);
+                $("#current_speed").text(json_obj.imu_v);
+                $("#lat").text(json_obj.imu_lat);
+                $("#lon").text(json_obj.imu_lon);
+                $("#alt").text(json_obj.imu_alt);
+                $("#steering").text(json_obj.vcu_steering);
+                $("#pedal_ratio").text(json_obj.vcu_throttle);
+                $("#speed_left_front").text(json_obj.vcu_wheel_spd);
             });
         });
     </script>
