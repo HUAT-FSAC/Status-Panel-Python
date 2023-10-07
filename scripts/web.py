@@ -4,17 +4,23 @@
 
 from flask import Flask, render_template
 from flask_socketio import SocketIO
+import pprint, json
+from threading import Lock
 
 # global
 app = Flask(__name__)
-socketio = SocketIO(app)
+# socketio = SocketIO(app, cors_allowed_origins='*', async_mode='eventlet', logger=True, engineio_logger=True)
+socketio = SocketIO(app, cors_allowed_origins='*', async_mode='eventlet')
+thread = None
+lock = Lock()
+_json_raw = ""
 
 # web route
 @app.route('/')
 def index():
     return render_template(
         "index.html", 
-        current_speed=0.0, 
+        speed=0.0, 
         lat=0.0, 
         lon=0.0,
         alt=0.0
@@ -22,30 +28,47 @@ def index():
 
 @socketio.on('connect')
 def handle_connection():
-    # print('frontend has connected')
-    # socketio.emit("connection", "backend connected")
+    print("\n\n\nFrom web:")
+    pprint.pprint(socketio.__dict__)
+
+    global thread
+    with lock:
+        if thread == None:
+            thread = socketio.start_background_task(target=update)
     pass
 
 @socketio.on('disconnect')
 def handle_disconnect():
-    # print('frontend disconnected')
-    # socketio.emit("connection", "backend disconnected")
     pass
 
-@socketio.on('msg')
+@socketio.on('message')
 def msg(data):
     # actually msg callback
-    print("msg" + data)
+    print("msg: " + data)
     pass
 
-@socketio.on("control")
-def control(cmd):
-    #TODO
-    pass
+def read(file_path):
+    global _json_raw
+    with open(file_path, "r",) as f:
+        _json_raw = f.read()
 
-def update(data):
-    # only json accepted
-    socketio.emit("server_response", data)
+        try:
+            json.loads(_json_raw)
+        except ValueError:
+            print("Invalid JSON")
+        else:
+            print("Valid JSON")
+            return _json_raw
+        return ""
+
+
+def update():
+    while True:
+        socketio.emit("message", read(""))
+        # socketio.sleep(2)
+        # socketio.emit("message", "ads")
+
+        
 
 if __name__ == "__main__":
-    socketio.run(app, host='0.0.0.0', port=5000)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=True)
