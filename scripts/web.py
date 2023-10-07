@@ -4,7 +4,7 @@
 
 from flask import Flask, render_template
 from flask_socketio import SocketIO
-import pprint, json
+import pprint, json, os
 from threading import Lock
 
 # global
@@ -64,11 +64,9 @@ def read(file_path):
 
 def update():
     while True:
-        socketio.emit("message", read(""))
+        socketio.emit("message", read("/home/" + os.getlogin() + "/.status-panel/data.json"))
         # socketio.sleep(2)
         # socketio.emit("message", "ads")
-
-        
 
 if __name__ == "__main__":
     socketio.run(app, host='0.0.0.0', port=5000, debug=True)
