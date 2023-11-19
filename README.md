@@ -1,5 +1,6 @@
 # status-panel-python
-A web interface for easy access of vitals on the vehicle
+A web interface for easy access of vitals on the vehicle  
+
 用于简单查看车辆重要信息的在线面板
 
 ![](./assets/Screenshot%20from%202023-10-04%2016-51-19.png)
